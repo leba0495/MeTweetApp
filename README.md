@@ -23,6 +23,8 @@ The following **bonus** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![ezgif com-gif-maker(2)](https://user-images.githubusercontent.com/61469904/126884477-d8da9b02-a673-4ea2-8286-8c0378f42fb2.gif)
+
 
 ### Notes
+This part of the Twitter project was really nice and introduced me to a lot of new methods and way dealing with API clients requests. I'm looking forward to complete the next parts of the Twitter project and see how many more new things I discover.
