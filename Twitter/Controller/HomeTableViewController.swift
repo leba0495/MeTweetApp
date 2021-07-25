@@ -49,7 +49,7 @@ class HomeTableViewController: UITableViewController {
             self.myRefreshControl.endRefreshing()
             
         }, failure: { (Error) in
-            print("Error while retrieving tweets.")
+            print(Error.localizedDescription)
         })
         
         
@@ -77,7 +77,8 @@ class HomeTableViewController: UITableViewController {
             self.myRefreshControl.endRefreshing()
             
         }, failure: { (Error) in
-            print("Error while retrieving tweets.")
+            print(Error.localizedDescription)
+            
         })
         
     }
