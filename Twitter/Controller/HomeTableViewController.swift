@@ -118,13 +118,18 @@ class HomeTableViewController: UITableViewController {
         cell.tweetTextLabel.text = tweet["text"] as? String
 
         
-        let imageUrl = URL(string: (user["profile_image_url_https"] as? String)!.replacingOccurrences(of: "normal", with: "", options: NSString.CompareOptions.literal, range: nil))
+        let imageUrl = URL(string: (user["profile_image_url_https"] as? String)!.replacingOccurrences(of: "_normal", with: "", options: NSString.CompareOptions.literal, range: nil))
         
         let data = try? Data(contentsOf: imageUrl!)
         
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        
+        cell.setFavorite(tweet["favorited"] as! Bool)
+        cell.tweetId = tweet["id"] as! Int
+        cell.setRetweet(tweet["retweeted"] as! Bool)
+        
         tableView.deselectRow(at: indexPath, animated: false)
         
         return cell
