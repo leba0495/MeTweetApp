@@ -18,17 +18,24 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadTweets()
+        self.loadTweets()
         
-        // For pull down refresh to work
+        // For pull down refresh to work.
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
         
         // Tell table which refresh control to use
         tableView.refreshControl = myRefreshControl
     }
     
+    // In order to reload once this view appers, since the viewDidLoad is only called once the controller is called into memory
+    override func viewDidAppear(_ animated: Bool) {
+        // Call super class first to make sure it does any of the cycle necessary.
+        super.viewDidAppear(animated)
+        self.loadTweets()
+    }
+    
+    
     @objc func loadTweets(){
-        
         numberOfTweets = 20
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         
@@ -56,7 +63,6 @@ class HomeTableViewController: UITableViewController {
     }
     
     func loadMoreTweets() {
-        
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         
         numberOfTweets += 20
@@ -110,13 +116,16 @@ class HomeTableViewController: UITableViewController {
         cell.userNameLabel.text = user["name"] as? String
             
         cell.tweetTextLabel.text = tweet["text"] as? String
+
         
-        let imageUrl = URL(string: (user["profile_image_url_https"] as? String)!)
+        let imageUrl = URL(string: (user["profile_image_url_https"] as? String)!.replacingOccurrences(of: "normal", with: "", options: NSString.CompareOptions.literal, range: nil))
+        
         let data = try? Data(contentsOf: imageUrl!)
         
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        tableView.deselectRow(at: indexPath, animated: false)
         
         return cell
     }
